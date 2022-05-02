@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace HighOrLower
 {
@@ -27,6 +28,7 @@ namespace HighOrLower
                         Console.Clear();
                         Console.WriteLine("You must choose a number between 1-2!!!!!");
                         ShowMainMenu();
+                        
                     }
                 }
 
@@ -36,6 +38,9 @@ namespace HighOrLower
                         StartGame();
                         break;
                     case 2:
+                        ShowHighscore();
+                        break;
+                    case 3:
                         game = false;
                         break;
                     default:
@@ -61,16 +66,50 @@ namespace HighOrLower
         private static void StartGame()
         {
             Console.Clear();
-            Console.WriteLine("Welcome!");
+            var listOfCards = Dealer.GetAllCards();
+            Dealer.Shuffle(listOfCards);
+            
+            Console.WriteLine("Shuffling cards...");
+            
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write("*");
+                Thread.Sleep(700);
+            }
+            
+
+            Console.Clear();
+            Console.Write("Username: ");
+            var name = Console.ReadLine();
+            
+            Console.Clear();
+            Console.WriteLine("Let the game begin " + name + "!");
+
             Console.ReadLine();
         }
         
         private static void ShowMainMenu()
         {
+            Console.Clear();
             Console.WriteLine("Menu: ");
             Console.WriteLine("1 : Start Game");
-            Console.WriteLine("2 : Exit Game");
-            Console.Write("Your answer: ");
+            Console.WriteLine("2 : Highscore");
+            Console.WriteLine("3 : Exit Game");
+            Console.Write("Answer: ");
+        }
+
+        private static void ShowHighscore()
+        {
+            Console.Clear();
+            Console.WriteLine("Highscore:" + "\n");
+            Console.WriteLine("1: " + " name " + "Score: ");
+            Console.WriteLine("2: " + " name " + "Score: ");
+            Console.WriteLine("3: " + " name " + "Score: ");
+            Console.WriteLine("4: " + " name " + "Score: ");
+            Console.WriteLine("5: " + " name " + "Score: ");
+
+            Console.WriteLine("Press ENTER to go back");
+            Console.ReadLine();
         }
 
         private static void WriteCards(List<Card> listOfCards)
