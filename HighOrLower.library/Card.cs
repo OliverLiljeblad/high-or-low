@@ -21,7 +21,9 @@ namespace HighOrLower.library
         
         public bool IsHigher(Card otherCard)
         {
-            if (Rank == Ranks.Ace && otherCard.Rank != Ranks.Ace)
+            if (this.Rank == Ranks.Ace && otherCard.Rank != Ranks.Ace)
+                return true;
+            if (otherCard.Rank == Ranks.Ace && this.Rank != Ranks.Ace)
                 return true;
 
             return Rank > otherCard.Rank; 
@@ -29,10 +31,12 @@ namespace HighOrLower.library
 
         public bool IsLower(Card otherCard)
         {
-            if (Rank == Ranks.Ace && otherCard.Rank != Ranks.Ace) 
-                return true; 
-
-            return Rank < otherCard.Rank; 
+            if (this.Rank == Ranks.Ace && otherCard.Rank != Ranks.Ace) 
+                return true;
+            if (otherCard.Rank == Ranks.Ace && this.Rank != Ranks.Ace)
+                return true;
+            
+            return this.Rank < otherCard.Rank; 
         }
 
         public Suits Suit { get; }
