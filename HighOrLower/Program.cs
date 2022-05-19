@@ -11,7 +11,7 @@ namespace HighOrLower
         static void Main(string[] args)
         {
             LeaderBoard leaderboard = new LeaderBoard();
-          
+            
             bool game = true;
             while (game)
             {
@@ -30,7 +30,6 @@ namespace HighOrLower
                         Console.Clear();
                         Console.WriteLine("You must choose a number between 1-3!!!!!");
                         ShowMainMenu();
-
                     }
                 }
 
@@ -73,15 +72,14 @@ namespace HighOrLower
             var listOfCards = Dealer.GetAllCards();
             Dealer.Shuffle(listOfCards);
             var stackOfCards = new Stack<Card>(listOfCards);
-
-            /* 
+ 
              Console.WriteLine("Shuffling cards...");
 
              for (int i = 0; i < 10; i++)
              {
-                 Console.Write("*");
-                 Thread.Sleep(600);
-             }  */
+                Console.Write("*");
+                Thread.Sleep(450);
+             }  
 
             Console.Clear();
             Console.Write("Username: ");
@@ -99,12 +97,10 @@ namespace HighOrLower
                 lastCard = stackOfCards.Pop();
                 for (int cardInRound = 0; cardInRound < 12; cardInRound++)
                 {
-                   
-                    Console.WriteLine("DEBUG: " + cardInRound);
+                    
                     ConsoleKey key;
                     var curentCard = stackOfCards.Pop();
 
-                    Console.WriteLine("DEBUG: " + curentCard);
                     do
                     {
                         Console.WriteLine($"This is your card   {lastCard}  ");
@@ -124,12 +120,19 @@ namespace HighOrLower
                         {
                             score += 1;
                             Console.WriteLine("The card was higher");
-                            Console.WriteLine($"Your score : {score}");
+                            Console.WriteLine($"Your score : {score} ");
+                            if (round == 12)
+                            {
+                                Console.WriteLine("You got another 50 score");
+                                Console.WriteLine($"Now your score is {score}");
+                            }
                             lastCard = curentCard;
                         }
                         else
                         {
-                            Console.WriteLine("The card was lower, you lost");
+                            Console.WriteLine("The card was lower, you lost this round");
+                            Console.WriteLine("Press ENTER to go to next round");
+                            Console.ReadLine();
                             break;
 
                         }
@@ -146,6 +149,8 @@ namespace HighOrLower
                         else
                         {
                             Console.WriteLine("The card was higher, you lost");
+                            Console.WriteLine("Press ENTER to go to next round");
+                            Console.ReadLine();
                             break;
                         }
                     }
